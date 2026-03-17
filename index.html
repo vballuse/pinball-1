@@ -3,38 +3,63 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>我的影片網頁</title>
+        <title>自適應影片網頁</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
+                margin: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100vh;
-                margin: 0;
-                background-color: #072e27; /* 你的專屬深綠色 */
-            }
-            .video-container {
-                width: 100%;
-                max-width: 600px; /* 限制最大寬度，電腦上才不會太寬 */
-                height: 250px; /* 你可以調整這個數值，讓高度更小 */
-                overflow: hidden; /* 確保影片超出部分被修剪 */
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                min-height: 100vh;
+                background-image: url('BG.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                padding: 20px; /* 增加留白，避免手機版貼邊 */
             }
 
-            video {
+            .video-container {
                 width: 100%;
-                height: 100%; /* 填滿容器高度 */
-                object-fit: cover; /* 關鍵！影片會像背景圖一樣填滿，不會變形 */
+                max-width: 600px;
+                /* --- 修正處：移除 aspect-ratio 和固定 height --- */
+                height: auto; /* 高度自動根據內容撐開 */
+                min-height: 200px; /* 設定一個最小高度，避免沒內容時太扁 */
+                /* ------------------------------------------ */
+
+                overflow: visible; /* 讓內容溢出時依然可見 (或設為 hidden 但由內容撐開) */
+                border-radius: 12px;
+                background-color: rgba(
+                    0,
+                    0,
+                    0,
+                    0.6
+                ); /* 增加半透明黑底，讓表格文字更清楚 */
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            /* 確保裡面的圖片或影片也會自適應 */
+            .video-container img,
+            .video-container video {
+                width: 100%;
+                height: auto; /* 讓影片/圖片按照原始比例顯示，不強制填滿 */
                 display: block;
+                border-radius: 12px 12px 0 0; /* 只有上方圓角，如果下方有文字的話 */
+            }
+
+            /* 如果你裡面有放那張表格圖，可以加這個 */
+            .content-table {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
             }
         </style>
     </head>
     <body>
-        <div class="video-wrapper">
-            <video width="100%" autoplay muted loop playsinline>
-                <source src="test.mp4" type="video/mp4" />
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="1.mp4" type="video/mp4" />
                 您的瀏覽器不支援影片播放。
             </video>
         </div>
