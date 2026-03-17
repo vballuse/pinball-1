@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>自適應影片網頁</title>
+        <title>精緻小巧影片網頁</title>
         <style>
             body {
                 margin: 0;
@@ -16,43 +16,33 @@
                 background-position: center;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-                padding: 20px; /* 增加留白，避免手機版貼邊 */
+                padding: 20px;
             }
 
             .video-container {
-                width: 100%;
-                max-width: 600px;
-                /* --- 修正處：移除 aspect-ratio 和固定 height --- */
-                height: auto; /* 高度自動根據內容撐開 */
-                min-height: 200px; /* 設定一個最小高度，避免沒內容時太扁 */
-                /* ------------------------------------------ */
-
-                overflow: visible; /* 讓內容溢出時依然可見 (或設為 hidden 但由內容撐開) */
-                border-radius: 12px;
-                background-color: rgba(
-                    0,
-                    0,
-                    0,
-                    0.6
-                ); /* 增加半透明黑底，讓表格文字更清楚 */
+                width: 85%; /* 在小螢幕上佔 85% 寬，讓四周有留白 */
+                max-width: 350px; /* --- 關鍵：縮小電腦版的最大寬度 --- */
+                height: auto;
+                overflow: hidden; /* 改回 hidden，配合圓角比較乾淨 */
+                border-radius: 15px;
+                background-color: rgba(0, 0, 0, 0.6);
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 border: 1px solid rgba(255, 255, 255, 0.2);
             }
 
-            /* 確保裡面的圖片或影片也會自適應 */
-            .video-container img,
-            .video-container video {
+            video {
                 width: 100%;
-                height: auto; /* 讓影片/圖片按照原始比例顯示，不強制填滿 */
+                height: auto; /* 保持比例 */
                 display: block;
-                border-radius: 12px 12px 0 0; /* 只有上方圓角，如果下方有文字的話 */
+                /* 如果你之後要在下方加表格圖，這裡可以用 border-radius: 15px 15px 0 0; */
+                border-radius: 15px;
             }
 
-            /* 如果你裡面有放那張表格圖，可以加這個 */
-            .content-table {
+            /* 如果之後有放表格圖，設定在這邊 */
+            .content-table img {
                 width: 100%;
-                padding: 10px;
-                box-sizing: border-box;
+                height: auto;
+                display: block;
             }
         </style>
     </head>
